@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="submitFn()" (keyup.enter)="submitFn()"></form>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-text [color]="subtitleColor">
+          <p>{{ this.subtitle }}</p>
+        </ion-text>
+      </ion-col>
+      <ion-col *ngIf="form.controls['code'].enabled">
+        <ion-item>
+          <ion-label position="floating">Verification Code</ion-label>
+          <ion-input formControlName="code" type="number" name="code"></ion-input>
+          <ion-text *ngIf="errorMessages.code" color="danger">{{ errorMessages.code }}</ion-text>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="form.controls['email'].enabled">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email" name="email"></ion-input>
+          <ion-text *ngIf="errorMessages.email" color="danger">{{ errorMessages.email }}</ion-text>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="form.controls['password'].enabled">
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password" name="password"></ion-input>
+          <ion-text *ngIf="errorMessages.password" color="danger">{{ errorMessages.password }}</ion-text>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="form.controls['confirmPassword'].enabled">
+        <ion-item>
+          <ion-label position="floating">Confirm Password</ion-label>
+          <ion-input formControlName="confirmPassword" type="password" name="confirmPassword"></ion-input>
+          <ion-text *ngIf="errorMessages.confirmPassword" color="danger">{{ errorMessages.confirmPassword }}</ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="auth-btns-row">
+      <ion-col>
+        <ion-button href="" (click)="switchBtnFn()">{{ switchBtnLabel }}</ion-button>
+      </ion-col>
+      <ion-col *ngIf="hasForgotPasswordBtn">
+        <ion-button href="" (click)="switchToForgotPassword()">Forgot your password?</ion-button>
+      </ion-col>
+      <ion-col></ion-col>
+      <ion-col size="auto">
+        <ion-button [disabled]="!form || form.invalid" type="submit">Submit</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
